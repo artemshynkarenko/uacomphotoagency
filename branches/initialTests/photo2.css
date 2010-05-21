@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+html,body {
+background-color:#000000;
+color: #dddddd;
+font-family:Arial, Helvetica, helv, sans-serif;
+font-size:11px;
+margin:0;
+padding:0;
+}
+#general{
+width:990px;
+margin:13px auto 0 auto;
+/*min-height:730px;
+  height:auto !important;
+  height:730px;*/
+  display:table;
+}
+#topDiv{
+width:990px;
+height:65px;
+background-color:#000000;
+margin:0 0 2px 0;
+float:left;
+clear:both;
+padding:0;
+border-bottom:1px solid #ff0000;
+display:inline;
+}
+#topMenu{
+float:right;
+clear:none;
+margin:0;
+padding:0;
+width:742px;
+background-color:#000000;
+text-align:right
+}
+#logo{
+float:left;
+clear:left;
+width:248px;
+margin:0;
+display:inline;
+padding:0;
+background-color:#ff5500;
+
+}
+#topLinkBar{
+float:right;
+clear:right;
+display:inline;
+padding:0;
+margin:0 0 0 0;
+width:600px;
+color:#000000;
+text-align:right;
+}
+
+.menuItem
+{
+background-repeat:no-repeat;
+background-position: 0px 0px;
+text-indent: -9999px;
+}
+
+.menuItem:hoved
+{
+background-repeat:no-repeat;
+background-position: 0px -60px;
+}
+
+.portrait
+{
+background-image:url(./cgi-bin/topMenuItemDouble.php?text=portraits)
+}
