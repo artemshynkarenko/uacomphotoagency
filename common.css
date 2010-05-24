@@ -1,0 +1,54 @@
+body
+{
+background-color:#000000;
+color:#FFFFFF;
+padding:0px;
+margin:0px;
+}
+
+h1, h2, h3
+{
+padding:0px;
+margin:0px;
+}
+
+.logo
+{
+width:250px;
+height:60px;
+background-image:url(img/index-logo.gif);
+background-repeat:no-repeat;
+background-position:center;
+display:block;
+float:left;
+}
+
+.menu
+{
+	text-indent: -9999em;
+	width: 100%;
+	display:block;
+}
+
+
+.mainDiv {
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
+	max-width:500px;
+	min-width:500px;
+	position:relative;
+	text-align:center;
+	top:70px;
+	width:800px;
+}
+
+.fullsize
+{
+height:150px;
+}
+
+.smallsize
+{
+height:75px;
+}
