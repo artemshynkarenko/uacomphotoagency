@@ -23,7 +23,7 @@ var next = "";//used in the navigation arrows when viewing a single item
 
 
 
-function $(a){document.write(a);}
+function PRINT(a){document.write(a);}
 
 function trimString(s) 
 { 
@@ -98,7 +98,7 @@ function getJson(j){
 /*function getAlbumList(j){ 
 //returns the list of all albums for the user
 
- $("<table border=0><tr>");
+ PRINT("<table border=0><tr>");
 
  for(i=0;i<j.feed.entry.length;i++){
 
@@ -108,20 +108,20 @@ function getJson(j){
   var id_end = j.feed.entry[i].id.$t.indexOf('?');
   var id_base = j.feed.entry[i].id.$t.slice(id_begin, id_end);
 
-  $("<td valign=top><a class='standard' href='?albumid="+id_base+"'><img src='"+img_base+"?imgmax=160&crop=1' class='pwimages' /></a>");
-  $("<br><table border=0><tr><td></td></tr></table><center><a class='standard' href='?albumid="+id_base+"'>"+ j.feed.entry[i].title.$t +"</a></center></td>");
+  PRINT("<td valign=top><a class='standard' href='?albumid="+id_base+"'><img src='"+img_base+"?imgmax=160&crop=1' class='pwimages' /></a>");
+  PRINT("<br><table border=0><tr><td></td></tr></table><center><a class='standard' href='?albumid="+id_base+"'>"+ j.feed.entry[i].title.$t +"</a></center></td>");
   if (i % columns == columns-1) {
-    $("</tr><tr><td><br></td></tr> <tr><td></td></tr> <tr>");
+    PRINT("</tr><tr><td><br></td></tr> <tr><td></td></tr> <tr>");
   }
  }
- $("</tr></table>");
+ PRINT("</tr></table>");
  
 }
 
 */
 
 /*function getAlbumsByCategory(j){ 
- $("<table border=0><tr>");
+ PRINT("<table border=0><tr>");
  for(i=0;i<j.feed.entry.length;i++){
 
   var img_base = j.feed.entry[i].media$group.media$content[0].url;
@@ -131,20 +131,20 @@ function getJson(j){
   var id_base = j.feed.entry[i].id.$t.slice(id_begin, id_end);
   
   if( j.feed.entry[i].media$group.media$description.$t == "Weddings"){
-	  $("<td valign=top><a class='standard' href='?albumid="+id_base+"'><img src='"+img_base+"?imgmax=160&crop=1' alt='" + j.feed.entry[i].title.$t +"' class='pwimages' border='none' border='0'/></a>");
-//	  $("<br><table border=0><tr><td></td></tr></table><center><a class='standard' href='?albumid="+id_base+"'>"+ j.feed.entry[i].title.$t +"</a></center></td>");
+	  PRINT("<td valign=top><a class='standard' href='?albumid="+id_base+"'><img src='"+img_base+"?imgmax=160&crop=1' alt='" + j.feed.entry[i].title.$t +"' class='pwimages' border='none' border='0'/></a>");
+//	  PRINT("<br><table border=0><tr><td></td></tr></table><center><a class='standard' href='?albumid="+id_base+"'>"+ j.feed.entry[i].title.$t +"</a></center></td>");
   if (i % columns == columns-1) {
-    $("</tr><tr><td><br></td></tr> <tr><td></td></tr> <tr>");
+    PRINT("</tr><tr><td><br></td></tr> <tr><td></td></tr> <tr>");
   }
   }
  }
- $("</tr></table>");
+ PRINT("</tr></table>");
  
 }
 */
 
 function getAlbumsByCategoryLevel(j, c, lv){ 
- 	$("<table border=0><tr>");
+ 	PRINT("<table border=0><tr>");
  	
 	for( var i=0; i<j.feed.entry.length; i++ ){
 
@@ -156,28 +156,34 @@ function getAlbumsByCategoryLevel(j, c, lv){
   
   		if( ( albumCateg.level1.toLowerCase()==c.toLowerCase() ) && ( albumCateg.level2.toLowerCase()==lv.toLowerCase() ) ){
 
-			$("<td valign=top><a class='standard' href='?category=" + _GET['category']+"&level2="+_GET['level2']
+			PRINT("<td valign=top><a class='standard' href='?category=" + _GET['category']+"&level2="+_GET['level2']
 				+"&albumid="+id_base+"'><img src='"+img_base+"?imgmax=160&crop=1' alt='" + 
 					j.feed.entry[i].title.$t +"' class='pwimages' border='none' border='0'/></a>");
   		
 			if (i % columns == columns-1) {
-    			$("</tr><tr><td><br></td></tr> <tr><td></td></tr> <tr>");
+    			PRINT("</tr><tr><td><br></td></tr> <tr><td></td></tr> <tr>");
   			}
   		}
  	}
- 	$("</tr></table>");
+ 	PRINT("</tr></table>");
 }
 
 
 function getCategorySublevels(j, c){
 	var labels = new Array();
 //	alert(j);
-	$("<p>");
+	PRINT("<p>");
  
 	for( var i = 0; i < j.feed.entry.length; i++ ){
-		var albumCateg = JSON.parse(j.feed.entry[i].media$group.media$description.$t);
-		var lev1 = trimString(albumCateg.level1.toLowerCase());
-		var lev2 = trimString(albumCateg.level2.toLowerCase());
+		var albumCateg = j.feed.entry[i].media$group.media$description.$t;
+		
+		var lev1 = "";
+		if (albumCateg.level1)
+			lev1  = trimString(albumCateg.level1.toLowerCase());
+		var lev2 = "";
+		if (albumCateg.level2)
+			lev2 = trimString(albumCateg.level2.toLowerCase());
+
 		var flag = true;
 		var ctg = trimString(c.toLowerCase());
 		
@@ -192,10 +198,10 @@ function getCategorySublevels(j, c){
 		if( flag && ( lev2 != "top" ) ){
 			labels.push( lev2 );
 			//alert('level1='+ lev1 +'; level2=' + lev2  );
-			$('<a href="test.html?category=' + lev1 + '&level2=' + lev2 + '">' + getLabel( lev2 ) + '</a>&nbsp;');
+			PRINT('<a href="test.html?category=' + lev1 + '&level2=' + lev2 + '">' + getLabel( lev2 ) + '</a>&nbsp;');
 		}
 	}
- 	$("</p>");	
+ 	PRINT("</p>");	
 }
 
 
@@ -258,8 +264,8 @@ function albums(j){  //returns all photos in a specific album
  var album_link = j.feed.entry[0].summary.$t.slice(album_begin, album_end);
  var photoids = new Array();
 
- //$("<div style='margin-left:3px'><a class='standard' href='" + window.location.protocol + "//" + window.location.hostname+window.location.pathname+"'>Gallery Home</a> &gt; "+ j.feed.title.$t +"&nbsp;&nbsp;["+np+" item"+item_plural+"]</div><div style='text-align:right; margin-right:5px; margin-top:-14px'><a target=PICASA class='standard' href='"+album_link+"'>View this album in Picasa</a></div><br>");
- $("<table border=0><tr>");
+ //PRINT("<div style='margin-left:3px'><a class='standard' href='" + window.location.protocol + "//" + window.location.hostname+window.location.pathname+"'>Gallery Home</a> &gt; "+ j.feed.title.$t +"&nbsp;&nbsp;["+np+" item"+item_plural+"]</div><div style='text-align:right; margin-right:5px; margin-top:-14px'><a target=PICASA class='standard' href='"+album_link+"'>View this album in Picasa</a></div><br>");
+ PRINT("<ul border=0 id='lighBox'>");
 
  for(i=0;i<j.feed.entry.length;i++){
 
@@ -282,16 +288,21 @@ function albums(j){  //returns all photos in a specific album
   // note: this is probably not necessary now that we're no longer passing the photoarray inside the URL. 7/17/2007
   // Not a bad idea to leave it in, though, in case something goes seriously wrong and we need to revert to that method.
   if (link_url.length > 2048) { link_url = link_url.slice(0, link_url.indexOf('&photoids=')+10)+id_base; }
-  $("<td valign=top><a href='"+link_url+"'><img src='"+img_base+"?imgmax=160&crop=1' class='pwimages' /></a>");
-  //$("<p><center><SPAN STYLE='font-size: 9px'>"+j.feed.entry[i].media$group.media$description.$t+"</span></center>");
-  $("</td>");
+  PRINT("<li valign=top><a class='gallery' href='"+img_base+"'><img src='"+img_base+"?imgmax=160&crop=1' class='pwimages' /></a>");
+  
+  //PRINT("<p><center><SPAN STYLE='font-size: 9px'>"+j.feed.entry[i].media$group.media$description.$t+"</span></center>");
+  PRINT("</li>");
 
-  if (i % columns == columns-1) {
-    $("</tr><tr><td><br></td></tr><tr>");
-  }
+  /*if (i % columns == columns-1) {
+    PRINT("</tr><tr><td><br></td></tr><tr>");
+  }*/
  }
- $("</tr></table>");
-
+ PRINT("</ul>");
+ alert("Here we go for jQuery!");
+ alert($('a.gallery'));
+ alert("JQuery working");
+$('a.gallery').lightbox();
+ alert("Executed");
 }
 
 
@@ -318,7 +329,7 @@ function photo(j){//returns exactly one photo
  var is_video = 0;
  if (j.entry.media$group.media$content.length > 1)
  {
-   //$('This is a '+j.entry.media$group.media$content[1].medium+'.<br>');
+   //PRINT('This is a '+j.entry.media$group.media$content[1].medium+'.<br>');
    if (j.entry.media$group.media$content[1].medium == "video")
    {
 	   is_video = 1;
@@ -344,8 +355,8 @@ function photo(j){//returns exactly one photo
  //var my_numpics = _GET['np'];
  //instead, we now get this through the global variable my_numpics. 7/18/2007
 
- //$("photo ids: "+_GET['photoids']+".<br><br>");
- //$("photolist: "+photo_array+".<br><br>");
+ //PRINT("photo ids: "+_GET['photoids']+".<br><br>");
+ //PRINT("photolist: "+photo_array+".<br><br>");
 
  //var my_galleryname = _GET['galleryname'];
  //var my_fixed_galleryname = my_galleryname.slice(1, my_galleryname.length-1);
@@ -413,7 +424,7 @@ if (is_video == 1) //if it's a video, don't say it's a picture, say it's an "ite
 //if (photo_array.length == 1) { var current_index_text = "Total of " + my_numpics + " " + item_label + my_item_plural; } else { var current_index_text = item_label_caps + " " + current_index + " of " + my_numpics; }
 var current_index_text = item_label_caps + " " + current_index + " of " + my_numpics;
 if (is_video == 1) { current_index_text = current_index_text + "&nbsp;&nbsp;[VIDEO]"; }  //show in the breadcrumbs that the item is a video
-$("<div style='margin-left:3px'><a class='standard' href='"+ window.location.protocol + "//" + window.location.hostname+window.location.pathname+"'>Gallery Home</a> &gt; <a class='standard' href='" + album_base_path + "'>" + my_fixed_galleryname + "</a> &gt; <!--" + img_filename + "-->" + current_index_text + "</div><div style='text-align:right; margin-right:3px; margin-top:-14px'><a target=PICASA class='standard' href='"+photo_link+"'>View this image in Picasa</a></div><br>");
+PRINT("<div style='margin-left:3px'><a class='standard' href='"+ window.location.protocol + "//" + window.location.hostname+window.location.pathname+"'>Gallery Home</a> &gt; <a class='standard' href='" + album_base_path + "'>" + my_fixed_galleryname + "</a> &gt; <!--" + img_filename + "-->" + current_index_text + "</div><div style='text-align:right; margin-right:3px; margin-top:-14px'><a target=PICASA class='standard' href='"+photo_link+"'>View this image in Picasa</a></div><br>");
 
 
 if (p1 == null) //we're at the first picture in the album; going back takes us to the album index
@@ -423,11 +434,11 @@ if (n1 == null) //we're at the last picture in the album; going forward takes us
   { var next = album_base_path }
 
  //the navigation panel: back, home, and next.
- $("<center><table border=0><tr valign=top>");
- if (photo_array.length > 1) { $("<td><a class='standard' href='"+prev+"'><img border=0 alt='Previous item' src='prev.jpg'></a> </td><td></td>"); }
- $("<td> <a class='standard' href='"+album_base_path+"'><img border=0 alt='Back to album index' src='home.jpg'></a> </td>");
- if (photo_array.length > 1) { $("<td></td><td> <a class='standard' href='"+next+"'><img border=0 alt='Next item' src='next.jpg'></a></td>"); }
- $("</tr></table></center><br>");
+ PRINT("<center><table border=0><tr valign=top>");
+ if (photo_array.length > 1) { PRINT("<td><a class='standard' href='"+prev+"'><img border=0 alt='Previous item' src='prev.jpg'></a> </td><td></td>"); }
+ PRINT("<td> <a class='standard' href='"+album_base_path+"'><img border=0 alt='Back to album index' src='home.jpg'></a> </td>");
+ if (photo_array.length > 1) { PRINT("<td></td><td> <a class='standard' href='"+next+"'><img border=0 alt='Next item' src='next.jpg'></a></td>"); }
+ PRINT("</tr></table></center><br>");
 
  var max_width = 658; //max width for our photos
  var display_width = max_width;
@@ -435,20 +446,20 @@ if (n1 == null) //we're at the last picture in the album; going forward takes us
    { display_width = img_width; } //don't scale up photos that are narrower than our max width; disable this to set all photos to max width
 
  //at long last, display the image and its description. photos larger than max_width are scaled down; smaller ones are left alone
- $("<center><a border=0 target=PICASA href='"+photo_link+"'><img id='picture' width="+display_width+" src='"+img_base+"?imgmax="+photosize+"' class='pwimages' /></a></center>");
- $("<br><center><div style='margin-left:2px'>"+j.entry.media$group.media$description.$t+"</div></center></p>");
+ PRINT("<center><a border=0 target=PICASA href='"+photo_link+"'><img id='picture' width="+display_width+" src='"+img_base+"?imgmax="+photosize+"' class='pwimages' /></a></center>");
+ PRINT("<br><center><div style='margin-left:2px'>"+j.entry.media$group.media$description.$t+"</div></center></p>");
 
 
  //now we will trap left and right arrow keys so we can scroll through the photos with a single keypress ;-) JMB 7/5/2007
- $('<script language="Javascript"> function testKeyCode( evt, intKeyCode ) { if ( window.createPopup ) return evt.keyCode == intKeyCode; else return evt.which == intKeyCode; } document.onkeydown = function ( evt ) { if ( evt == null ) evt = event; if ( testKeyCode( evt, 37 ) ) { window.location = "' + prev + '"; return false; } if ( testKeyCode( evt, 39 ) ) { window.location = "' + next + '"; return false; } } </script>');
+ PRINT('<script language="Javascript"> function testKeyCode( evt, intKeyCode ) { if ( window.createPopup ) return evt.keyCode == intKeyCode; else return evt.which == intKeyCode; } document.onkeydown = function ( evt ) { if ( evt == null ) evt = event; if ( testKeyCode( evt, 37 ) ) { window.location = "' + prev + '"; return false; } if ( testKeyCode( evt, 39 ) ) { window.location = "' + next + '"; return false; } } </script>');
 
 
  // an attempt at resampling the photo, rather than relying on the browser's internal resize function. doesn't work, unfortunately.
  //
- //$("<?php $filename='"+img_base+"?imgmax="+photosize+"'; $width = 658; $height = 1600; list($width_orig, $height_orig) = getimagesize($filename); ");
- //$("$ratio_orig = $width_orig/$height_orig; if ($width/$height > $ratio_orig) { $width = $height*$ratio_orig; } else { $height = $width/$ratio_orig; } ");
- //$("$image_p = imagecreatetruecolor($width, $height); $image = imagecreatefromjpeg($filename); ");
- //$("imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig); imagejpeg($image_p, null, 100); ?>");
+ //PRINT("<?php PRINTfilename='"+img_base+"?imgmax="+photosize+"'; PRINTwidth = 658; PRINTheight = 1600; list(PRINTwidth_orig, PRINTheight_orig) = getimagesize(PRINTfilename); ");
+ //PRINT("PRINTratio_orig = PRINTwidth_orig/PRINTheight_orig; if (PRINTwidth/PRINTheight > PRINTratio_orig) { PRINTwidth = PRINTheight*PRINTratio_orig; } else { PRINTheight = PRINTwidth/PRINTratio_orig; } ");
+ //PRINT("PRINTimage_p = imagecreatetruecolor(PRINTwidth, PRINTheight); PRINTimage = imagecreatefromjpeg(PRINTfilename); ");
+ //PRINT("imagecopyresampled(PRINTimage_p, PRINTimage, 0, 0, 0, 0, PRINTwidth, PRINTheight, PRINTwidth_orig, PRINTheight_orig); imagejpeg(PRINTimage_p, null, 100); ?>");
 
 }
 
@@ -456,38 +467,38 @@ if (n1 == null) //we're at the last picture in the album; going forward takes us
 
 
 if( !_GET['category']){
-	$('<p>');
-	$('<a href="test.html?category=wedding">Весілля</a>&nbsp;');
-	$('<a href="test.html?category=portrait">Портрет</a>&nbsp;');
-	$('<a href="test.html?category=fashion">Мода</a>&nbsp;');
-	$('<a href="test.html?category=project">Проекти</a>&nbsp;');
-	$('</p>');
+	PRINT('<p>');
+	PRINT('<a href="test.html?category=wedding">Весілля</a>&nbsp;');
+	PRINT('<a href="test.html?category=portrait">Портрет</a>&nbsp;');
+	PRINT('<a href="test.html?category=fashion">Мода</a>&nbsp;');
+	PRINT('<a href="test.html?category=project">Проекти</a>&nbsp;');
+	PRINT('</p>');
 }
 else {
-	$('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/' + username +
+	PRINT('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/' + username +
   			'?category=album&alt=json&callback=getJson&access=public"></' + 'script>'); //getting feed from picasa
 
 	if( !_GET['level2'] ){
-		$('<script type="text/javascript">getCategorySublevels(photoOutput, _GET["category"] );</script>');
-		$('<script type="text/javascript">getAlbumsByCategoryLevel( photoOutput, _GET[ "category" ], "top" );</' + 'script>');
+		PRINT('<script type="text/javascript">getCategorySublevels(photoOutput, _GET["category"] );</script>');
+		PRINT('<script type="text/javascript">getAlbumsByCategoryLevel( photoOutput, _GET[ "category" ], "top" );</' + 'script>');
 	}
 	else{
-		$('<script type="text/javascript">getCategorySublevels(photoOutput, _GET["category"] );</script>');
+		PRINT('<script type="text/javascript">getCategorySublevels(photoOutput, _GET["category"] );</script>');
 		
 		if(_GET['photoid']&&_GET['albumid']){
-	 		$('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/'+username+'/albumid/'
+	 		PRINT('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/'+username+'/albumid/'
 	   			+_GET['albumid']+'?category=photo&alt=json&callback=getphotolist"></' + 'script>');
 	 //get the list of photos in the album and put it in the global "photolist" array so we can prop
  
- 			$('<script type="text/javascript" src="http://picasaweb.google.com/data/entry/base/user/'+username+'/albumid/'
+ 			PRINT('<script type="text/javascript" src="http://picasaweb.google.com/data/entry/base/user/'+username+'/albumid/'
    				+_GET['albumid']+'/photoid/'+_GET['photoid']+'?alt=json&callback=photo"></' + 'script>');//photo
 		}
 		else if(_GET['albumid']&&!_GET['photoid']){
- 		$('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/'+username+'/albumid/'+_GET['albumid']
+ 		PRINT('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/'+username+'/albumid/'+_GET['albumid']
 			+ '?category=photo&alt=json&callback=albums"></' + 'script>');//albums
 		}
 		else{
- 			$('<script type="text/javascript">getAlbumsByCategoryLevel( photoOutput, _GET[ "category" ], _GET[ "level2" ] );</' + 'script>');
+ 			PRINT('<script type="text/javascript">getAlbumsByCategoryLevel( photoOutput, _GET[ "category" ], _GET[ "level2" ] );</' + 'script>');
 		}
 		
 //		..
@@ -501,10 +512,10 @@ else {
 
 
 /*
-$('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/' + username +
+PRINT('<script type="text/javascript" src="http://picasaweb.google.com/data/feed/base/user/' + username +
   '?category=album&alt=json&callback=getJson&access=public"></script>');
 
-$('<script type="text/javascript">getAlbumsByCategoryLevel( photoOutput, "wedding", "album" );</script>');
+PRINT('<script type="text/javascript">getAlbumsByCategoryLevel( photoOutput, "wedding", "album" );</script>');
 */
 
 
