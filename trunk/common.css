@@ -30,6 +30,18 @@ float:left;
 	display:block;
 }
 
+.menuItem
+{
+background-repeat:no-repeat;
+background-position: 0px -60px;
+}
+
+.menuItem:hover
+{
+background-repeat:no-repeat;
+background-position: 0px 0px;
+}
+
 
 .mainDiv {
 	height:100%;
