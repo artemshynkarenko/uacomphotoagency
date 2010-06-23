@@ -26,8 +26,8 @@ $box = imagettfbbox( $fontsize, 0, $font, $itemStr );
 //var_dump($box);
 $x = $itemWidth - ($box[2] - $box[0]);
 //Writes text to the image using fonts using FreeType 2
-imagettftext($bg, $fontsize, 0, $x, 35, $grey1, $font, $itemStr);
-imagettftext($bg, $fontsize, 0, $x, 95, $grey0, $font, $itemStr);
+imagettftext($bg, $fontsize, 0, $x, 43, $grey1, $font, $itemStr);
+imagettftext($bg, $fontsize, 0, $x, 103, $grey0, $font, $itemStr);
 
 
 //Create image
