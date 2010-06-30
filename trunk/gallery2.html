@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Фотографи Наталя та Інна Шинкаренко</title>
 <!--link href="common.css" type="text/css" media="screen" rel="stylesheet" /-->
 <script type="text/javascript" src="jquery-1.4.2.js" ></script>
-<script type="text/javascript" src="my-picasa.js" ></script>
+<script type="text/javascript" src="my-picasa2.js" ></script>
 <style type="text/css">
 body
 {
@@ -33,7 +33,7 @@ h1, h2, h3
 	margin:0px;
 	top:0px;
 	left:0px;
-	border:solid 1px white;
+	/*border:solid 1px white;*/
 }
 
 .menu
@@ -47,6 +47,7 @@ h1, h2, h3
 {
 background-repeat:no-repeat;
 background-position: 0px -60px;
+border-bottom:solid 1px white;
 }
 
 .menuItem:hover
@@ -55,6 +56,12 @@ background-repeat:no-repeat;
 background-position: 0px 0px;
 }
 
+.selectedMenuItem
+{
+background-repeat:no-repeat;
+background-position: 0px 0px;
+border-bottom:solid 1px red;
+}
 
 .mainDiv {
 	height:100%;
@@ -69,6 +76,7 @@ background-position: 0px 0px;
 }
 
 #categoryTopMenu {
+	/*border:solid 1px grey*/
 	display:block;
 	padding:0px;
 	margin:0px;
@@ -81,7 +89,7 @@ background-position: 0px 0px;
 	list-style:none;
 	padding:0px;
 	margin:0px;
-	border:solid 1px white;
+	/*border:solid 1px white;*/
 	width:150px;
 	height:70px;
 	float:left;
@@ -97,6 +105,7 @@ background-position: 0px 0px;
 	padding:0px;
 	margin:0px;
 	position:absolute;
+	/*border:solid 1px red*/
 	width:150px;
 	top: 100px;
 	left: 0px;
@@ -105,7 +114,7 @@ background-position: 0px 0px;
 	list-style:none;
 	padding:0px;
 	margin:0px;
-	border:solid 1px orange;
+	/*border:solid 1px orange;*/
 	height: 70px;
 }
 #albumList a{
@@ -122,25 +131,25 @@ background-position: 0px 0px;
 	top:110px;
 	left:160px;
 	width: 740px;
+	/*border:solid 1px lime*/
 }
 #thumbnails p{
 	padding:0px;
 	margin:0px;
-	border:solid 1px green;
+	/*border:solid 1px green;*/
 	height: 160px;
 	float:left;
 }
 </style>
 </head>
-
 <body>
     <div class="mainDiv">
     <h1 class="menu logo">Фотографи Наталя та Інна Шинкаренко</h1>
-    <ul id="categoryTopMenu" style="border:solid 1px grey">
+    <ul id="categoryTopMenu">
     </ul>
-    <ul id="albumList" style="border:solid 1px red">	
+    <ul id="albumList">	
     </ul>
-    <div id="thumbnails" style="border:solid 1px lime">
+    <div id="thumbnails">
     </div>
     </div>
     <div id="scriptsEval"></div>
