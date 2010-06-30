@@ -1,4 +1,4 @@
-﻿//
+//
 //
 //
 
@@ -122,15 +122,25 @@ function endGetAlbumList(picasaJson){
 		alert("Picass version has changed. Site may not work as properly. Sorry :(");
 	}
 	var albumFeed = picasaJson.feed.entry;
+	for(var i = 0; i < albumFeed.length; ++i){
+		var metaJsonString = albumFeed[i].media$group.media$description.$t;
+		//alert("Raw metadata: " + metaJsonString);
+		if(!metaJsonString || metaJsonString == "")
+			continue;
+		eval("albumFeed[i].media$group.media$description.$t = " + metaJsonString + ";");
+	}
 	getPageStateFromUrl();
-	buildLevel1Menu(albumFeed);
-	buildLevel2Menu(albumFeed);
 	if(!pageState.albumId){
 		buildLevelContent(albumFeed);
 	}
 	else{
 		buildAlbumContent();
 	}
+	document.title = getLocalizedValue(pageState.level1) + " :: " + document.title;
+	buildLevel1Menu(albumFeed);
+	buildLevel2Menu(albumFeed);
+	
+	buildBreadScrums(albumFeed);
 	//alert ("End endGetAlbumList");
 }
 
@@ -141,11 +151,10 @@ function buildLevel1Menu(albumFeed){
 	//alert ("Start buildLevel1Menu");
 	var menuItems = new Array();
 	for(var i = 0; i < albumFeed.length; ++i){
-		var metaJsonString = albumFeed[i].media$group.media$description.$t;
+		var metaJson = albumFeed[i].media$group.media$description.$t;
 		//alert("Raw metadata: " + metaJsonString);
-		if(!metaJsonString || metaJsonString == "")
+		if(!metaJson || metaJson == "")
 			continue;
-		var metaJson = JSON.parse(metaJsonString);
 		
 		if(!metaJson.level1)
 			continue;
@@ -167,30 +176,30 @@ function buildLevel1Menu(albumFeed){
 	}
 	//alert("Found " + menuItems.length + "top menuItems");
 	var menuHolder = $("#" + level1MenuItemId);
+	var styleTag = '<style type="text/css">';
 	for(var i = 0; i < menuItems.length; ++i){
 		var menuItem =  menuItems[i];
+		var localizedValue = getLocalizedValue(menuItem.level1);
+		var menuHtml = '<li id="' + menuItem.level1 + 'Header" class="menuItem';
 		if (menuItem.level1 == pageState.level1){
-			var menuHtml = '<li><h2><a href="' + pageStateToUrl(menuItem) + '">'
- 				+ getLocalizedValue(menuItem.level1) + ' SELECTED</a></h2></li>';
-			_print ( menuHolder, menuHtml);
+			 menuHtml += ' selectedMenuItem';
 		}
-		else{
-			var menuHtml = '<li><h2><a href="' + pageStateToUrl(menuItem) + '">'
- 				+ getLocalizedValue(menuItem.level1) + '</a></h2></li>';
-			_print ( menuHolder, menuHtml);
-		}
+		menuHtml += '"><h2>';
+		menuHtml += '<a class="menu" onclick="this.blur();" title="' +
+			localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
+		menuHtml += '</h2></li>';
+		_print ( menuHolder, menuHtml);
+		styleTag += "#" + menuItem.level1 +"Header{ background-image:url('scripts/text2img.php?text=" + encodeURIComponent(localizedValue) + "');}\r\n";
 	}
+	styleTag += '</style>';
+	_print(menuHolder, styleTag);
 	//alert ("End buildLevel1Menu");
 }
 function buildLevel2Menu(albumFeed){
 	//alert ("Start buildLevel2Menu");
 	var menuItems = new Array();
 	for(var i = 0; i < albumFeed.length; ++i){
-		var metaJsonString = albumFeed[i].media$group.media$description.$t;
-		//alert("Raw metadata: " + metaJsonString);
-		if(!metaJsonString || metaJsonString == "")
-			continue;
-		var metaJson = JSON.parse(metaJsonString);
+		var metaJson = albumFeed[i].media$group.media$description.$t;
 		
 		if(!metaJson.level1 || metaJson.level1.toLowerCase().indexOf(pageState.level1) == -1)
 			continue;
@@ -213,19 +222,23 @@ function buildLevel2Menu(albumFeed){
 	}
 	//alert("Found " + menuItems.length + " albumlist items");
 	var menuHolder = $("#" + level2MenuItemId);
+	var styleTag = '<style type="text/css">';
 	for(var i = 0; i < menuItems.length; ++i){
 		var menuItem =  menuItems[i];
+		var localizedValue = getLocalizedValue(menuItem.level2) + ' (' +menuItem.count + ')';
+		var menuHtml = '<li id="' + menuItem.level2 + 'Header" class="menuItem';
 		if (menuItem.level2 == pageState.level2){
-			var menuHtml = '<li><h3><a href="' + pageStateToUrl(menuItem) + '">'
- 				+ getLocalizedValue(menuItem.level2) + '&nbsp;(' + menuItem.count + ') SELECTED</a></h3></li>';
-			_print ( menuHolder, menuHtml);
+			 menuHtml += ' selectedMenuItem';
 		}
-		else{
-			var menuHtml = '<li><h3><a href="' + pageStateToUrl(menuItem) + '">'
- 				+ getLocalizedValue(menuItem.level2) + '&nbsp;(' + menuItem.count + ')</a></h3></li>';
-			_print ( menuHolder, menuHtml);
-		}
+		menuHtml += '"><h3>';
+		menuHtml += '<a class="menu" onclick="this.blur();" title="' +
+			localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
+		menuHtml += '</h3></li>';
+		_print ( menuHolder, menuHtml);
+		styleTag += "#" + menuItem.level2 +"Header{ background-image:url('scripts/text2img.php?text=" + encodeURIComponent(localizedValue) + "');}\r\n";
 	}
+	styleTag += '</style>';
+	_print(menuHolder, styleTag);
 	//alert ("End buildLevel2Menu");
 }
 
@@ -234,18 +247,13 @@ function buildLevelContent(albumFeed){
 	var albumsItems = new Array();
 	for(var i = 0; i < albumFeed.length; ++i){
 		var feedItem = albumFeed[i]
-		var metaJsonString = feedItem.media$group.media$description.$t;
-		//alert("Raw metadata: " + metaJsonString);
-		if(!metaJsonString || metaJsonString == "")
-			continue;
-		var metaJson = JSON.parse(metaJsonString);
+		var metaJson = feedItem.media$group.media$description.$t;
 		
 		if(!metaJson.level1 || metaJson.level1.toLowerCase().indexOf(pageState.level1) == -1 )
 			continue;
 		if (!metaJson.level2 || metaJson.level2.toLowerCase().indexOf(pageState.level2) == -1 )
 			continue;
 		//alert("Level1, Level2 satisfied");
-		feedItem.media$group.media$description.$t = metaJson;
 		albumsItems.push( {"level1": pageState.level1, "level2": pageState.level2,  "jSon" : feedItem} );
 	}
 	//alert("Found " + albumsItems.length + " albums");
@@ -260,9 +268,8 @@ function buildLevelContent(albumFeed){
 		albumItem.albumId = id_base;
 		var albumTitle = albumItem.jSon.title.$t;
 		var imageUrl = albumItem.jSon.media$group.media$content[0].url + '?imgmax=160&crop=1';
-		var albumHtml = '<p><a href="' + pageStateToUrl(albumItem) + '">'
-			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" class="pwimages" />'
-			+ albumTitle + '</a></p>';
+		var albumHtml = '<p><a href="' + pageStateToUrl(albumItem) + '" title="'+ albumTitle + '">'
+			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" class="pwimages" /></a></p>';
 		_print ( contentHolder, albumHtml);
 	}
 	//alert ("End buildLevelContent");
@@ -294,4 +301,8 @@ function endGetAlbumPhotos(photosFeed){
 		_print ( contentHolder, imageHtml);
 	}
 	//alert ("End endGetAlbumPhotos");
+}
+
+function buildBreadScrums(albumFeed){
+	//TODO: add breadscums leve11Name > level2Name > AlbumName
 }
