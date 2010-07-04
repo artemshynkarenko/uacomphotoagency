@@ -269,7 +269,7 @@ function buildLevelContent(albumFeed){
 		var albumTitle = albumItem.jSon.title.$t;
 		var imageUrl = albumItem.jSon.media$group.media$content[0].url + '?imgmax=160&crop=1';
 		var albumHtml = '<p><a href="' + pageStateToUrl(albumItem) + '" title="'+ albumTitle + '">'
-			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" class="pwimages" /></a></p>';
+			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" /></a></p>';
 		_print ( contentHolder, albumHtml);
 	}
 	//alert ("End buildLevelContent");
@@ -297,7 +297,7 @@ function endGetAlbumPhotos(photosFeed){
 		var imageItem = entry[i];
 		var imgUrl = imageItem.media$group.media$content[0].url;
 		var imageHtml = '<p><a class="gallery" href="' + imgUrl + '">'
-			+ '<img src="' + imgUrl + '?imgmax=160&crop=1" class="pwimages" /></a></p>';
+			+ '<img src="' + imgUrl + '?imgmax=72&crop=1" class="pwimages" /></a></p>';
 		_print ( contentHolder, imageHtml);
 	}
 	//alert ("End endGetAlbumPhotos");

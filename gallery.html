@@ -25,7 +25,7 @@ h1, h2, h3
 {
 	width:250px;
 	height:60px;
-	background-image:url(img/logo.png);
+	background-image:url(img/index-logo.gif);
 	background-repeat:no-repeat;
 	background-position:left;
 	position:absolute;
@@ -33,7 +33,7 @@ h1, h2, h3
 	margin:0px;
 	top:0px;
 	left:0px;
-	border:solid 1px white;
+	/*border:solid 1px white;*/
 }
 
 .menu
@@ -49,10 +49,17 @@ background-repeat:no-repeat;
 background-position: 0px -60px;
 }
 
+.selectedMenuItem
+{
+border-bottom:solid 1px red!important;
+background-position: 0px 0px;
+}
+
 .menuItem:hover
 {
 background-repeat:no-repeat;
 background-position: 0px 0px;
+border-bottom:solid 1px #d0d0d0!important;
 }
 
 
@@ -72,25 +79,28 @@ background-position: 0px 0px;
 	display:block;
 	padding:0px;
 	margin:0px;
-	height:70px;
+	height:40px;
 	position:absolute;
-	top: 30px;
-	left: 290px;
+	/*border:solid 1px grey;*/
+	top: 50px;
+	left: 272px;
 }
 #categoryTopMenu li{
 	list-style:none;
 	padding:0px;
 	margin:0px;
-	border:solid 1px white;
+	/*border:solid 1px white;*/
 	width:150px;
-	height:70px;
+	height:40px;
 	float:left;
+	border-bottom:solid 1px #808080;
 }
 #categoryTopMenu a{
 	padding:0px;
 	margin:0px;
 	width:150px;
-	height:70px;
+	height:40px;
+	/*border:solid 1px grey;*/
 }
 #albumList {
 	display:block;
@@ -100,47 +110,59 @@ background-position: 0px 0px;
 	width:150px;
 	top: 100px;
 	left: 0px;
+	/*border:solid 1px red;*/
 }
 #albumList li{
 	list-style:none;
 	padding:0px;
 	margin:0px;
-	border:solid 1px orange;
-	height: 70px;
+	/*border:solid 1px orange;*/
+	height: 40px;
+	border-bottom:solid 1px #808080;
 }
 #albumList a{
 	padding:0px;
 	margin:0px;
 	width:150px;
-	height:70px;
+	height:40px;
 }
 #thumbnails{
 	display:block;
 	padding:0px;
 	margin:0px;
 	position:absolute;
-	top:110px;
-	left:160px;
-	width: 740px;
+	top:120px;
+	left:170px;
+	width: 730px;
+	/*border:solid 1px lime;*/
 }
 #thumbnails p{
 	padding:0px;
+	padding-bottom:6px;
+	padding-left:6px;
 	margin:0px;
-	border:solid 1px green;
-	height: 160px;
+	border: none;
+	height: 72px;
 	float:left;
 }
+#thumbnails a, #thumbnails img
+{
+	padding:0px;
+	margin:0px;
+	border: none;
+}
+
 </style>
 </head>
 
 <body>
     <div class="mainDiv">
     <h1 class="menu logo">Фотографи Наталя та Інна Шинкаренко</h1>
-    <ul id="categoryTopMenu" style="border:solid 1px grey">
+    <ul id="categoryTopMenu">
     </ul>
-    <ul id="albumList" style="border:solid 1px red">	
+    <ul id="albumList">	
     </ul>
-    <div id="thumbnails" style="border:solid 1px lime">
+    <div id="thumbnails">
     </div>
     </div>
     <div id="scriptsEval"></div>
