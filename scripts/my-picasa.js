@@ -300,6 +300,7 @@ function endGetAlbumPhotos(photosFeed){
 			+ '<img src="' + imgUrl + '?imgmax=72&crop=1" class="pwimages" /></a></p>';
 		_print ( contentHolder, imageHtml);
 	}
+	$("a.gallery").lightbox();
 	//alert ("End endGetAlbumPhotos");
 }
 

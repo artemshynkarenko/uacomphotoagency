@@ -1,0 +1,113 @@
+#collageWrapper
+{
+	width:625px;
+	heigh:500px;
+	padding:0px;
+	margin:0px;
+	display:block;
+	position:relative;
+	border:none;
+	top: 80px;
+}
+#collageWrapper li
+{
+	position:absolute;
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	border:solid 1px white;
+}
+#weddingHeader
+{
+	width:250px;
+	top:0px;
+	left:0px;
+	height:250px;
+	background-image:url(../img/index/wedding.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+#portraitHeader
+{
+	width:250px;
+	top:250px;
+	left:375px;
+	height:250px;
+	background-image:url(../img/index/portrait.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+
+#kidsHeader
+{
+	width:250px;
+	top:250px;
+	left:0px;
+	height:250px;
+	background-image:url(../img/index/kids-portrait.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+#fashionAdvertiseHeader
+{
+	width:125px;
+	top:125px;
+	left:500px;
+	height:125px;
+	background-image:url(../img/index/fashion-ad.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+
+#portfolioHeader
+{
+	width:250px;
+	top:0px;
+	left:250px;
+	height:250px;
+	background-image:url(../img/index/fashion-portfolio.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+}
+#advertiseHeader
+{
+	width:125px;
+	top:250px;
+	left:250px;
+	height:125px;
+	background-image:url(../img/index/comm.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+#projectHeader
+{
+	width:125px;
+	top:375px;
+	left:250px;
+	height:125px;
+	background-image:url(../img/index/project.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+#balletHeader
+{
+	width:125px;
+	top:0px;
+	left:500px;
+	height:125px;
+	background-image:url(../img/index/ballet.jpg);
+	background-repeat:no-repeat;
+	background-position:center;
+
+}
+
+.contactLink
+{
+background-image:url(../cgi-bin/topMenuItemDouble.php?text=contacts)
+}
