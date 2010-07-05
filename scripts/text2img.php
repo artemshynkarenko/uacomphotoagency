@@ -1,6 +1,6 @@
 <?php
 
-$itemHeight = 120;
+$itemHeight = 110;
 $itemWidth = 150;
 
 
@@ -17,7 +17,7 @@ imagefilledrectangle($bg, 0, 0, imagesx($bg), imagesy($bg), $trans_colour);
 
 
 $grey0 = imagecolorallocate($bg, 128, 128, 128);
-$grey1 = imagecolorallocate($bg, 178, 178, 178);
+$grey1 = imagecolorallocate($bg, 208, 208, 208);
 
 
 //Text to be written
@@ -26,8 +26,8 @@ $box = imagettfbbox( $fontsize, 0, $font, $itemStr );
 //var_dump($box);
 $x = $itemWidth - ($box[2] - $box[0]);
 //Writes text to the image using fonts using FreeType 2
-imagettftext($bg, $fontsize, 0, $x, 43, $grey1, $font, $itemStr);
-imagettftext($bg, $fontsize, 0, $x, 103, $grey0, $font, $itemStr);
+imagettftext($bg, $fontsize, 0, $x, 33, $grey1, $font, $itemStr);
+imagettftext($bg, $fontsize, 0, $x, 93, $grey0, $font, $itemStr);
 
 
 //Create image
