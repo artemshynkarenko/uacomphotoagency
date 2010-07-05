@@ -16,7 +16,7 @@ margin:0px;
 {
 width:250px;
 height:60px;
-background-image:url(img/logo.png);
+background-image:url(../img/logo.png);
 background-repeat:no-repeat;
 background-position:center;
 display:block;
@@ -54,7 +54,7 @@ background-position: 0px 0px;
 	min-width:625px;
 	position:relative;
 	text-align:center;
-	top:20px;
+	top:15px;
 	width:625px;
 }
 
