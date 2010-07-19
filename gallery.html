@@ -5,6 +5,7 @@
 <title>Фотографи Наталя та Інна Шинкаренко</title>
 <!--link href="common.css" type="text/css" media="screen" rel="stylesheet" /-->
 <script type="text/javascript" src="scripts/jquery-1.4.2.js" ></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.8.2.custom.min.js" ></script>
 <script type="text/javascript" src="scripts/jquery.lightbox.js"></script>
 <script type="text/javascript" src="scripts/my-picasa.js" ></script>
 <style type="text/css">
@@ -24,7 +25,7 @@ h1, h2, h3,h4
 
 .logo
 {
-	width:150px;
+	width:270px !important;
 	height:60px;
 	background-image:url(img/index-logo.gif);
 	background-repeat:no-repeat;
@@ -185,7 +186,7 @@ border-bottom:solid 1px #d0d0d0!important;
     <div class="mainDiv">
    
     <ul id="categoryTopMenu">
-    <li style="width:272px;border-bottom:none !important"><h1 class="menu logo">Фотографи Наталя та Інна Шинкаренко</h1></li>
+    <li style="width:272px!important;border-bottom:none !important"><h1><a href="index.html" class="menu logo">Фотографи Наталя та Інна Шинкаренко</a></h1></li>
     </ul>
     <ul id="albumList">	
     </ul>
@@ -198,6 +199,7 @@ border-bottom:solid 1px #d0d0d0!important;
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//alert("Start onDocumentReady");
+			$("a.menu").focus(function(){this.blur();});
 			if (beginGetAlbumsList){
 				beginGetAlbumsList();
 			}
