@@ -9,6 +9,7 @@ var lastVisit = new Date();
 var level2MenuItemId = "albumList";
 var level1MenuItemId = "categoryTopMenu";
 var contentItemId = "thumbnails";
+var albumThumbs = "albumThumbnails";
 var labels = {
 	"wedding": "Весілля",
 	"album" : "Aльбом",
@@ -231,10 +232,13 @@ function buildLevel2Menu(albumFeed){
 			 menuHtml += ' selectedMenuItem';
 		}
 		menuHtml += '"><h3>';
-		menuHtml += '<a class="menu" onclick="this.blur();" title="' +
+		menuHtml += '<a class="menu" onfocus="this.blur();" title="' +
 			localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
 		menuHtml += '</h3></li>';
 		_print ( menuHolder, menuHtml);
+		if (menuItem.level2 == pageState.level2){
+			styleTag += buildAlbumMenu(albumFeed, styleTag);
+		}
 		styleTag += "#" + menuItem.level2 +"Header{ background-image:url('scripts/text2img.php?text=" + encodeURIComponent(localizedValue) + "');}\r\n";
 	}
 	styleTag += '</style>';
@@ -242,6 +246,51 @@ function buildLevel2Menu(albumFeed){
 	//alert ("End buildLevel2Menu");
 }
 
+function buildAlbumMenu(albumFeed){
+	//alert ("Start buildAlbumMenu");
+	var styleTag = "";
+	var menuHolder = $("#" + level2MenuItemId);
+	var menuHtml = '';
+	for(var i = 0; i < albumFeed.length; ++i){
+		var albumItem =  albumFeed[i];
+		var metaJson = albumItem.media$group.media$description.$t;
+		
+		if(!metaJson.level1 || metaJson.level1.toLowerCase().indexOf(pageState.level1) == -1)
+			continue;
+		//alert("Level1 satisfied");
+		var level2String = metaJson.level2.toLowerCase();
+		var level2Items = level2String.split(',');
+		for(var k = 0; k < level2Items.length; ++k){
+			var level2 = level2Items[k];
+			if(level2 != pageState.level2)
+				continue;
+			//alert("Level2 satisfied");
+			var idString = parseAlbumIdFromJson( albumItem);
+			//alert(idString);
+			var albumTitle = albumItem.title.$t;
+			//alert(albumTitle);
+			var localizedValue = getLocalizedValue(albumTitle);
+			localizedValue = encodeURIComponent(localizedValue);
+			//alert(localizedValue);
+			menuHtml += '<li id="album' + idString + 'Header" class="menuItem';
+			if (pageState.albumId != null && idString.indexOf(pageState.albumId) > -1){
+				 menuHtml += ' selectedMenuItem';
+			}
+			var menuItem = {"level1": pageState.level1, "level2": pageState.level2, "albumId": idString};
+			menuHtml += '"><h4>';
+			menuHtml += '<a class="menu" onfocus="this.blur()" title="' +
+				localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
+			menuHtml += '</h4></li>';
+
+			styleTag += "#album" + idString +"Header{ border-bottom:none !important;background-image:url('scripts/text2imgSmall.php?text=" + localizedValue + "');height:25px !important;}\r\n#album" + idString +"Header a{height:25px !important;}";
+		}
+		
+	}
+	menuHtml += "";
+	_print ( menuHolder, menuHtml);
+	//alert ("End buildAlbumMenu");
+	return styleTag;
+}
 function buildLevelContent(albumFeed){
 	//alert ("Start buildLevelContent");
 	var albumsItems = new Array();
@@ -257,15 +306,10 @@ function buildLevelContent(albumFeed){
 		albumsItems.push( {"level1": pageState.level1, "level2": pageState.level2,  "jSon" : feedItem} );
 	}
 	//alert("Found " + albumsItems.length + " albums");
-	var contentHolder = $("#" + contentItemId);
+	var contentHolder = $("#" + albumThumbs);
 	for(var i = 0; i < albumsItems.length; ++i){
 		var albumItem =  albumsItems[i];
-		var idString = albumItem.jSon.id.$t;
-		//alert(idString);
-		var id_begin = idString.indexOf('albumid/')+8;
-  		var id_end = idString.indexOf('?');
-  		var id_base = idString.slice(id_begin, id_end);
-		albumItem.albumId = id_base;
+		albumItem.albumId = parseAlbumIdFromJson( albumItem.jSon);
 		var albumTitle = albumItem.jSon.title.$t;
 		var imageUrl = albumItem.jSon.media$group.media$content[0].url + '?imgmax=160&crop=1';
 		var albumHtml = '<p><a href="' + pageStateToUrl(albumItem) + '" title="'+ albumTitle + '">'
@@ -306,4 +350,13 @@ function endGetAlbumPhotos(photosFeed){
 
 function buildBreadScrums(albumFeed){
 	//TODO: add breadscums leve11Name > level2Name > AlbumName
+}
+
+function parseAlbumIdFromJson(albumFeedItem){
+	var idString = albumFeedItem.id.$t;
+	//alert(idString);
+	var id_begin = idString.indexOf('albumid/')+8;
+	var id_end = idString.indexOf('?');
+	var id_base = idString.slice(id_begin, id_end);
+	return  id_base;
 }
