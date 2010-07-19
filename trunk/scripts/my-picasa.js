@@ -186,7 +186,7 @@ function buildLevel1Menu(albumFeed){
 			 menuHtml += ' selectedMenuItem';
 		}
 		menuHtml += '"><h2>';
-		menuHtml += '<a class="menu" onclick="this.blur();" title="' +
+		menuHtml += '<a class="menu" title="' +
 			localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
 		menuHtml += '</h2></li>';
 		_print ( menuHolder, menuHtml);
@@ -232,7 +232,7 @@ function buildLevel2Menu(albumFeed){
 			 menuHtml += ' selectedMenuItem';
 		}
 		menuHtml += '"><h3>';
-		menuHtml += '<a class="menu" onfocus="this.blur();" title="' +
+		menuHtml += '<a class="menu" title="' +
 			localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
 		menuHtml += '</h3></li>';
 		_print ( menuHolder, menuHtml);
@@ -278,7 +278,7 @@ function buildAlbumMenu(albumFeed){
 			}
 			var menuItem = {"level1": pageState.level1, "level2": pageState.level2, "albumId": idString};
 			menuHtml += '"><h4>';
-			menuHtml += '<a class="menu" onfocus="this.blur()" title="' +
+			menuHtml += '<a class="menu" title="' +
 				localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
 			menuHtml += '</h4></li>';
 
@@ -310,11 +310,16 @@ function buildLevelContent(albumFeed){
 	for(var i = 0; i < albumsItems.length; ++i){
 		var albumItem =  albumsItems[i];
 		albumItem.albumId = parseAlbumIdFromJson( albumItem.jSon);
+		var albumHtmlItemId = "thumb" + albumItem.albumId;
 		var albumTitle = albumItem.jSon.title.$t;
 		var imageUrl = albumItem.jSon.media$group.media$content[0].url + '?imgmax=160&crop=1';
-		var albumHtml = '<p><a href="' + pageStateToUrl(albumItem) + '" title="'+ albumTitle + '">'
-			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" /></a></p>';
+		var albumHtml = '<p><a id="' + albumHtmlItemId + '"href="' + pageStateToUrl(albumItem) + '" title="'+ albumTitle + '">'
+			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" /><img id="' + albumHtmlItemId + 'Img" src="scripts/text2imgThumb.php?text=' + albumTitle + '" style="position:absolute;top:120px;left:6px;display:none"></a></p>';
 		_print ( contentHolder, albumHtml);
+		$("#" + albumHtmlItemId).hover(function()
+							{$("#" + albumHtmlItemId + "Img").show("slow");},
+		  								function()
+							{$("#" + albumHtmlItemId + "Img").hide("slow");})
 	}
 	//alert ("End buildLevelContent");
 }
