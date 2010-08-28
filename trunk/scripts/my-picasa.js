@@ -19,7 +19,9 @@ var labels = {
 	"portrait" : "Портрети",
 	"fashion" : "Мода",
 	"backstage" : "Backstage",
-	"top" : "Вибране"
+	"top" : "Вибране",
+	"album2009" : "Aльбоми 2009",
+	"album2010" : "Aльбоми 2010",
 };
 
 function getLocalizedValue( labelAlias){
@@ -66,7 +68,7 @@ function getPageStateFromUrl(){
 		level2 = level2.toLowerCase();
 	}
 	else{
-		level2 = "top";
+		level2 = "NONE";
 	}
 	
 	var albumId = _GET["albumId"];
@@ -131,17 +133,17 @@ function endGetAlbumList(picasaJson){
 		eval("albumFeed[i].media$group.media$description.$t = " + metaJsonString + ";");
 	}
 	getPageStateFromUrl();
+	
+	document.title = getLocalizedValue(pageState.level1) + " :: " + document.title;
+	buildLevel1Menu(albumFeed);
+	buildLevel2Menu(albumFeed);
+	buildBreadScrums(albumFeed);
 	if(!pageState.albumId){
 		buildLevelContent(albumFeed);
 	}
 	else{
 		buildAlbumContent();
 	}
-	document.title = getLocalizedValue(pageState.level1) + " :: " + document.title;
-	buildLevel1Menu(albumFeed);
-	buildLevel2Menu(albumFeed);
-	
-	buildBreadScrums(albumFeed);
 	//alert ("End endGetAlbumList");
 }
 
@@ -228,8 +230,9 @@ function buildLevel2Menu(albumFeed){
 		var menuItem =  menuItems[i];
 		var localizedValue = getLocalizedValue(menuItem.level2) + ' (' +menuItem.count + ')';
 		var menuHtml = '<li id="' + menuItem.level2 + 'Header" class="menuItem';
-		if (menuItem.level2 == pageState.level2){
+		if (menuItem.level2 == pageState.level2 || pageState.level2 == "NONE"){
 			 menuHtml += ' selectedMenuItem';
+			 pageState.level2 = menuItem.level2;
 		}
 		menuHtml += '"><h3>';
 		menuHtml += '<a class="menu" title="' +
@@ -262,6 +265,7 @@ function buildAlbumMenu(albumFeed){
 		var level2Items = level2String.split(',');
 		for(var k = 0; k < level2Items.length; ++k){
 			var level2 = level2Items[k];
+			//alert(level2 + " != " + pageState.level2);
 			if(level2 != pageState.level2)
 				continue;
 			//alert("Level2 satisfied");
@@ -270,7 +274,7 @@ function buildAlbumMenu(albumFeed){
 			var albumTitle = albumItem.title.$t;
 			//alert(albumTitle);
 			var localizedValue = getLocalizedValue(albumTitle);
-			localizedValue = encodeURIComponent(localizedValue);
+			//localizedValue = encodeURIComponent(localizedValue);
 			//alert(localizedValue);
 			menuHtml += '<li id="album' + idString + 'Header" class="menuItem';
 			if (pageState.albumId != null && idString.indexOf(pageState.albumId) > -1){
@@ -282,7 +286,7 @@ function buildAlbumMenu(albumFeed){
 				localizedValue + '" href="' + pageStateToUrl(menuItem) + '">' + localizedValue + '</a>';
 			menuHtml += '</h4></li>';
 
-			styleTag += "#album" + idString +"Header{ border-bottom:none !important;background-image:url('scripts/text2imgSmall.php?text=" + localizedValue + "');height:25px !important;}\r\n#album" + idString +"Header a{height:25px !important;}";
+			styleTag += "#album" + idString +"Header{ border-bottom:none !important;background-image:url('scripts/text2imgSmall.php?text=" + encodeURIComponent(localizedValue) + "');height:25px !important;}\r\n#album" + idString +"Header a{height:25px !important;}";
 		}
 		
 	}
@@ -297,11 +301,20 @@ function buildLevelContent(albumFeed){
 	for(var i = 0; i < albumFeed.length; ++i){
 		var feedItem = albumFeed[i]
 		var metaJson = feedItem.media$group.media$description.$t;
-		
+
 		if(!metaJson.level1 || metaJson.level1.toLowerCase().indexOf(pageState.level1) == -1 )
+		{
+			//if(metaJson.level1)
+			//	alert(metaJson.level1 +  "!=" + pageState.level1);
 			continue;
+		}
 		if (!metaJson.level2 || metaJson.level2.toLowerCase().indexOf(pageState.level2) == -1 )
+		{
+			//if(metaJson.level2)
+			//	alert(metaJson.level2 +  "!=" + pageState.level2);
 			continue;
+		}
+
 		//alert("Level1, Level2 satisfied");
 		albumsItems.push( {"level1": pageState.level1, "level2": pageState.level2,  "jSon" : feedItem} );
 	}
