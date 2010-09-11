@@ -327,12 +327,12 @@ function buildLevelContent(albumFeed){
 		var albumTitle = albumItem.jSon.title.$t;
 		var imageUrl = albumItem.jSon.media$group.media$content[0].url + '?imgmax=160&crop=1';
 		var albumHtml = '<p><a id="' + albumHtmlItemId + '"href="' + pageStateToUrl(albumItem) + '" title="'+ albumTitle + '">'
-			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" /><img id="' + albumHtmlItemId + 'Img" src="scripts/text2imgThumb.php?text=' + albumTitle + '" style="position:absolute;top:120px;left:6px;display:none"></a></p>';
+			+ '<img src="' + imageUrl + '" alt="' + albumTitle + '" /><img class="albumTitle" id="' + albumHtmlItemId + 'Img" src="scripts/text2imgThumb.php?text=' + encodeURIComponent(albumTitle) + '" alt="' + albumTitle + '"/></a></p>';
 		_print ( contentHolder, albumHtml);
 		$("#" + albumHtmlItemId).hover(function()
-							{$("#" + albumHtmlItemId + "Img").show("slow");},
+							{/*alert("IN");*/ $("#" + this.id + "Img").show("fast");},
 		  								function()
-							{$("#" + albumHtmlItemId + "Img").hide("slow");})
+							{/*alert("OUT");*/$("#" + this.id + "Img").hide("fast");})
 	}
 	//alert ("End buildLevelContent");
 }

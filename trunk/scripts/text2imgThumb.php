@@ -5,7 +5,7 @@ $itemWidth = 160;
 
 
 $font = './MyriadPro-Cond.ttf'; //path to font you want to use
-$fontsize = 16; //size of font
+$fontsize = 12; //size of font
 
 /*image generation code*/
 $bg = imagecreatetruecolor($itemWidth, $itemHeight) or die ('Cannot initialize GD image stream.');
