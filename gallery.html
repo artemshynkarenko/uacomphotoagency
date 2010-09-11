@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -173,12 +173,27 @@ border-bottom:solid 1px #d0d0d0!important;
 	height: 160px;
 	float:left;
 }
-#albumThumbnails a, #albumThumbnails img
+#albumThumbnails a
 {
+	padding:0px;
+	margin:0px;
+	display:block;
+	width:160px;
+	overflow:hidden;
+}
+#albumThumbnails img{
 	padding:0px;
 	margin:0px;
 	border: none;
 }
+
+#albumThumbnails img.albumTitle
+{
+	margin-left:-160px;
+	margin-bottom:50px;
+	display:none;
+}
+style="top:-40px;left:6px;display:none"
 </style>
 </head>
 
