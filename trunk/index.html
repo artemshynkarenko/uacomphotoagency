@@ -8,10 +8,46 @@
 <script type="text/javascript" src="scripts/jquery-1.4.2.js" ></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.8.2.custom.min.js" ></script>
 </head>
+<style type="text/css">
+#aboutUsWrapper{
+position: absolute;
+left:285px;
+top:580px;
+margin:0px;
+display:block;
+border:none;
+width:300px;
+}
+
+#aboutUsWrapper li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:40px;
+	float:left;
+	border-bottom:solid 1px #808080;
+}
+#aboutUsWrapper a{
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:30px;
+}
+#aboutHeader{
+	background-image:url('scripts/text2imgSmall.php?text=про нас');
+	border-bottom:0!important;
+}
+#contactHeader{
+	background-image:url('scripts/text2imgSmall.php?text=контакти');
+	border-bottom:0!important;
+}
+
+</style>
 <body>
     <div class="mainDiv">
     <h1 class="menu logo">Фотографи Наталя та Інна Шинкаренко</h1>
-	<ul id="collageWrapper">
+  <ul id="collageWrapper">
 		<li id="weddingHeader"><h2><a href="gallery.html?level1=wedding" title="Галерея весільних робіт" class="menu fullsize" onfocus="this.blur()">Перегляд галереї весільних робіт<img class="albumTitle" src="scripts/text2imgThumb.php?text=Галерея весільних робіт"/></a></h2></li>
         <li id="portfolioHeader"><h2><a href="gallery.html?level1=test1" title="Мода, портфоліо" class="menu fullsize" onfocus="this.blur()">Мода, портфоліо<img class="albumTitle" src="scripts/text2imgThumb.php?text=Мода, портфоліо"/></a></h2></li>    
         <li id="balletHeader"><h2><a href="gallery.html?level1=test2" title="Новини" class="menu fullsize" onfocus="this.blur()">"Свіжі" новини<img class="albumTitle" src="scripts/text2imgThumb.php?text=Новини"/></a></h2></li>
@@ -21,14 +57,18 @@
         <li id="projectHeader"><h2><a href="gallery.html?level1=wedding" title="Мистецькі проекти" class="menu smallsize" onfocus="this.blur()">Мистецькі проекти<img class="albumTitle" src="scripts/text2imgThumb.php?text=Мистецькі проекти"/></a></h2></li>  
         <li id="portraitHeader"><h2><a href="gallery.html?level1=test3" title="Портретне фото" class="menu fullsize" onfocus="this.blur()">Портретне фото<img class="albumTitle" src="scripts/text2imgThumb.php?text=Портретне фото"/></a></h2></li>
     </ul>
+	<ul id="aboutUsWrapper">
+		<li id="aboutHeader" class="menuItem"><h2><a href="gallery.html?level1=wedding" title="Про нас" class="menu fullsize" onfocus="this.blur()">Про нас</a></h2></li>
+		<li id="contactHeader" class="menuItem"><h2><a href="gallery.html?level1=wedding" title="Контакти" class="menu fullsize" onfocus="this.blur()">Контакти</a></h2></li>
+	</ul>
     </div>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			//alert("Start onDocumentReady");
 			$("li").hover(function()
-							{/*alert("IN");*/ $("img", this).show("puff");},
+							{/*alert("IN");*/ $("img", this).show("fast");},
 		  								function()
-							{/*alert("OUT"); $("img", this).hide("clip");*/})
+							{/*alert("OUT");*/ $("img", this).hide("clip");})
 			//alert("End onDocumentReady");
 		});
     </script>

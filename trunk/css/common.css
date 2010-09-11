@@ -16,12 +16,14 @@ margin:0px;
 {
 width:250px;
 height:60px;
+top:0px;
+left:10px;
 background-image:url(../img/logo.png);
 background-repeat:no-repeat;
-background-position:center;
+background-position:left middle;
 display:block;
 float:left;
-position:relative;
+position:absolute;
 padding:0px;
 margin:0px;
 }
@@ -43,6 +45,7 @@ background-position: 0px -60px;
 {
 background-repeat:no-repeat;
 background-position: 0px 0px;
+border-bottom:solid 1px #d0d0d0!important;
 }
 
 
@@ -54,7 +57,7 @@ background-position: 0px 0px;
 	min-width:625px;
 	position:relative;
 	text-align:center;
-	top:15px;
+	top:10px;
 	width:625px;
 }
 
