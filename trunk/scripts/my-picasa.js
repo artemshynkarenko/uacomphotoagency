@@ -12,16 +12,29 @@ var contentItemId = "thumbnails";
 var albumThumbs = "albumThumbnails";
 var labels = {
 	"wedding": "Весілля",
+	"album2009" : "Aльбоми 2009",
+	"album2010" : "Aльбоми 2010",
 	"album" : "Aльбом",
 	"archive" : "Архів",
 	"reportage" : "Репортаж",
+	
+	"ads": "Реклама",
+	"ads2": "Реклама",
+	
 	"project" : "Проекти",
-	"portrait" : "Портрети",
-	"fashion" : "Мода",
 	"backstage" : "Backstage",
+	"calendar" : "Календар",
+	"lviv" : "Львів",
+	"balet" : "Балет",
+	
+	"fashion" : "Мода",
 	"top" : "Вибране",
-	"album2009" : "Aльбоми 2009",
-	"album2010" : "Aльбоми 2010",
+	
+	"portrait" : "Портрети",
+	"womanportrait": "Жіночий",
+	"maleportrait": "Чоловічий",
+	"familyportrait": "Сімейний",
+	"kidsportrait": "Дитячий"
 };
 
 function getLocalizedValue( labelAlias){
