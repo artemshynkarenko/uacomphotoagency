@@ -196,6 +196,39 @@ border-bottom:solid 1px #d0d0d0!important;
 	display:none;
 }
 
+#aboutUsWrapper{
+position: absolute;
+left:530px;
+top:-15px;
+margin:0px;
+display:block;
+width:300px;
+}
+
+#aboutUsWrapper li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:40px;
+	float:left;
+	/*border-bottom:solid 1px #808080;*/
+}
+#aboutUsWrapper a{
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:30px;
+	/*border: solid 1px red;*/
+}
+#aboutHeader{
+	background-image:url('scripts/text2imgSmall.php?text=про нас');
+	border-bottom:0!important;
+}
+#contactHeader{
+	background-image:url('scripts/text2imgSmall.php?text=контакти');
+	border-bottom:0!important;
+}
 </style>
 </head>
 
@@ -205,6 +238,10 @@ border-bottom:solid 1px #d0d0d0!important;
     <ul id="categoryTopMenu">
     <li style="width:272px!important;border-bottom:none !important"><h1><a href="index.html" class="menu logo">Фотографи Наталя та Інна Шинкаренко</a></h1></li>
     </ul>
+	<ul id="aboutUsWrapper">
+		<li id="aboutHeader" class="menuItem"><h2><a href="about-us.html" title="Про нас" class="menu fullsize">Про нас</a></h2></li>
+		<li id="contactHeader" class="menuItem"><h2><a href="contacts.html" title="Контакти" class="menu fullsize">Контакти</a></h2></li>
+	</ul>
     <ul id="albumList">	
     </ul>
     <div id="thumbnails">
