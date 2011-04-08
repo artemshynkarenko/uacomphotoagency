@@ -1,4 +1,4 @@
-#collageWrapper
+﻿#collageWrapper
 {
 	width:625px;
 	heigh:500px;
@@ -160,4 +160,37 @@ background-image:url(../cgi-bin/topMenuItemDouble.php?text=contacts)
 {
 	top:50px;
 	left:50px;
+}
+#aboutUsWrapper{
+position: absolute;
+left:285px;
+top:580px;
+margin:0px;
+display:block;
+border:none;
+width:300px;
+}
+
+#aboutUsWrapper li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:40px;
+	float:left;
+	border-bottom:solid 1px #808080;
+}
+#aboutUsWrapper a{
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:30px;
+}
+#aboutHeader{
+	background-image:url('../scripts/text2imgSmall.php?text=про нас');
+	border-bottom:0!important;
+}
+#contactHeader{
+	background-image:url('../scripts/text2imgSmall.php?text=контакти');
+	border-bottom:0!important;
 }
