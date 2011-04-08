@@ -298,11 +298,8 @@ function albums(j){  //returns all photos in a specific album
   }*/
  }
  PRINT("</ul>");
- alert("Here we go for jQuery!");
- alert($('a.gallery'));
- alert("JQuery working");
+
 $('a.gallery').lightbox();
- alert("Executed");
 }
 
 

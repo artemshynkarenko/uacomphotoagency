@@ -1,0 +1,65 @@
+.linkIndex {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+}
+a.linkIndex:active {
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: none;
+	border-width: 0;
+	color: #FFFFFF;
+}
+.bodyTitle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.bodyText {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #CCCCCC;
+	text-decoration: none;
+	text-align: left;
+}
+
+a.bodyText {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #CCCCCC;
+	text-decoration: none;
+	text-align: left;
+}
+
+a.bodyText:active {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #FFFFFF;
+	text-decoration: none;
+	text-align: left;
+}
+a.bodyText:hover {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #CCCCCC;
+	text-decoration: none;
+	text-align: left;
+}
+a.bodyText:visited {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #CCCCCC;
+	text-decoration: none;
+	text-align: left;
+}
