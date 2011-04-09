@@ -26,6 +26,7 @@ var labels = {
 	"calendar" : "Календар",
 	"lviv" : "Львів",
 	"balet" : "Балет",
+	"travels" : "Подорожі",
 	
 	"fashion" : "Мода",
 	"top" : "Вибране",
