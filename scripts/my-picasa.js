@@ -101,6 +101,24 @@ function pageStateToUrl(newPageState){
 			 }
 		}
 	}
+	if(newPageState.level2 && newPageState.level2 == 'archive'){
+		switch(newPageState.level1){
+		case "wedding":
+			url = "/weddings/index.html";
+			break;
+		case "portrait":
+			url = "/portfolio/index.html";
+			break;
+		case "project":
+			url = "/gallery/index.html";
+			break;
+		case "ads":
+			url = "/gallery/index.html";
+			break;
+		default:
+			break;
+		}
+	}
 	//alert("End pageStateToUrl");
 	return url;
 }
@@ -236,12 +254,15 @@ function buildLevel2Menu(albumFeed){
 			}
 		}
 	}
+	menuItems.push( {"level1": pageState.level1, "level2": "archive", "count" : -1} );
 	//alert("Found " + menuItems.length + " albumlist items");
 	var menuHolder = $("#" + level2MenuItemId);
 	var styleTag = '<style type="text/css">';
 	for(var i = 0; i < menuItems.length; ++i){
 		var menuItem =  menuItems[i];
-		var localizedValue = getLocalizedValue(menuItem.level2) + ' (' +menuItem.count + ')';
+		var localizedValue = getLocalizedValue(menuItem.level2);
+		if (menuItem.count > 1 )
+			localizedValue += ' (' +menuItem.count + ')';
 		var menuHtml = '<li id="' + menuItem.level2 + 'Header" class="menuItem';
 		if (menuItem.level2 == pageState.level2 || pageState.level2 == "NONE"){
 			 menuHtml += ' selectedMenuItem';
