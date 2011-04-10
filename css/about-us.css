@@ -1,4 +1,4 @@
-﻿.logo
+.logo
 {
 	width:270px !important;
 	height:60px;
@@ -54,6 +54,7 @@ p{
 font-family: Arial;
 font-size:14px;
 text-align: left;
+color: #aaaaaa;
 }
 .selectedMenuItem
 {
