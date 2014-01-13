@@ -390,12 +390,10 @@ function endGetAlbumPhotos(photosFeed){
 	//alert ("Start endGetAlbumPhotos");
 	var entry = photosFeed.feed.entry;
 	var contentHolder = $("#" + contentItemId);
-	debugger;
 	for(var i=0; i < entry.length; i++){
-		
 		var imageItem = entry[i];
 		var imgUrl = imageItem.media$group.media$content[0].url;
-		var imgName = imageItem.title.$t
+		var imgName = imageItem.title.$t;
 		var imgUrlBig = imgUrl.replace(imgName, "s1600/" + imgName);
 		var imageHtml = '<p><a class="gallery" href="' + imgUrlBig + '">'
 			+ '<img src="' + imgUrl + '?imgmax=72&crop=1" class="pwimages" /></a></p>';
