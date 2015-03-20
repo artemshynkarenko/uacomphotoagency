@@ -1,0 +1,1 @@
+Private project. For open source is interesting only integration with Picasa account using javascript.
